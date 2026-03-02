@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skolotāja panelis</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header-section">
+    <div>
+      <h2>Skolotāja panelis</h2>
+      <p class="welcome">Sveiks, <b>{{ current_user.name }}</b>!</p>
+    </div>
+    <a href="/logout" class="logout-link">Izlogoties</a>
+  </div>
+
+  <div id="message-area"></div>
+
+  <section class="card">
+    <h3>📋 Skolēnu pieteikumi</h3>
+    <p class="hint">Šeit redzami skolēnu pieteikumi uz jūsu konsultācijām.</p>
+    
+    <div style="margin-bottom: 15px;">
+      <label for="filter">Filtrēt pēc statusa:</label>
+      <select id="filter" onchange="loadTeacherRequests()" style="max-width: 300px;">
+        <option value="all">Visi</option>
+        <option value="pending">⏳ Gaida</option>
+        <option value="accepted">✓ Apstiprināti</option>
+        <option value="rejected">✗ Noraidīti</option>
+      </select>
+    </div>
+
+    <div id="requests"></div>
+    <div id="loading" class="loading" style="display: none;">Ielādē...</div>
+  </section>
+
+  <!-- Modāle komentāra ievadei skolotājam -->
+  <div id="consultation-notes-modal" class="modal hidden">
+    <div class="modal-backdrop" id="notes-modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Konsultācijas rezultāts</h3>
+        <span class="modal-close" onclick="closeNotesModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Pievienojiet komentāru par konsultācijas darbu (skolēns to var redzēt):</p>
+        <textarea id="consultation-notes" placeholder="Piem: Labi pastrādāja, jāatkārto logaritmi..." maxlength="500" style="width: 100%; min-height: 120px; margin: 10px 0;">
+        </textarea>
+        <div style="text-align: right; font-size: 12px; color: #999;">
+          <span id="notes-char-count">0</span>/500
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeNotesModal()" class="btn-cancel">Atcelt</button>
+        <button id="confirm-notes-btn" onclick="confirmConsultationNotes()" class="btn-primary">Pieņemt ar komentāru</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Current user's role for client-side UI decisions
+  window.currentUserRole = "{{ current_user.role }}";
+</script>
+<script src="/static/app.js"></script>
+</body>
+</html>

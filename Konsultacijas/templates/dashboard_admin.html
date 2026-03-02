@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin panelis</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header-section">
+    <div>
+      <h2>Admin panelis</h2>
+      <p class="welcome">Sveiks, <b>{{ current_user.name }}</b>!</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button onclick="adminCleanup()" class="btn-secondary">🧹 Palaist tīrīšanu</button>
+      <a href="/logout" class="logout-link">Izlogoties</a>
+    </div>
+  </div>
+
+  <div id="message-area"></div>
+
+  <!-- Statistics Section -->
+  <section class="card">
+    <h3>📊 Statistika</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-students">-</div>
+        <div class="stat-label">Skolēni</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-teachers">-</div>
+        <div class="stat-label">Skolotāji</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-slots">-</div>
+        <div class="stat-label">Konsultācijas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-pending">-</div>
+        <div class="stat-label">Gaida apstiprinājumu</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-accepted">-</div>
+        <div class="stat-label">Apstiprināti</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-rejected">-</div>
+        <div class="stat-label">Noraidīti</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add Consultation Slot Section -->
+  <section class="card">
+    <h3>➕ Pievienot konsultācijas laiku</h3>
+    <div class="form-grid">
+      <div>
+        <label for="slot-teacher">Skolotājs:</label>
+        <select id="slot-teacher" required></select>
+      </div>
+      <div>
+        <label for="slot-day">Diena:</label>
+        <select id="slot-day" required>
+          <option value="">Izvēlieties dienu</option>
+          <option value="Pirmdiena">Pirmdiena</option>
+          <option value="Otrdiena">Otrdiena</option>
+          <option value="Trešdiena">Trešdiena</option>
+          <option value="Ceturtdiena">Ceturtdiena</option>
+          <option value="Piektdiena">Piektdiena</option>
+        </select>
+      </div>
+      <div>
+        <label for="slot-time">Laiks (piem. 14:30-15:15):</label>
+        <input id="slot-time" placeholder="14:30-15:15" required>
+      </div>
+      <div>
+        <label for="slot-room">Kabinets:</label>
+        <input id="slot-room" placeholder="201" required>
+      </div>
+      <div>
+        <label for="slot-max">Maksimālais skolēnu skaits:</label>
+        <input type="number" id="slot-max" value="10" min="1" max="50" required>
+      </div>
+      <div>
+        <button onclick="addSlot()" class="btn-primary">➕ Pievienot laiku</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation Slots Management -->
+  <section class="card">
+    <h3>📅 Konsultācijas laiki</h3>
+    <div id="slots-list" class="slots-list"></div>
+  </section>
+
+  <!-- Users Management Section -->
+  <section class="card">
+    <h3>👥 Lietotāju pārvalde</h3>
+    
+    <div style="margin-bottom: 20px;">
+      <label for="user-role-filter">Filtrēt pēc lomas:</label>
+      <select id="user-role-filter" onchange="loadUsers()" style="max-width: 300px;">
+        <option value="">Visas lomas</option>
+        <option value="student">Skolēni</option>
+        <option value="teacher">Skolotāji</option>
+        <option value="admin">Administratori</option>
+      </select>
+    </div>
+
+    <div id="users-list" class="users-list"></div>
+  </section>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

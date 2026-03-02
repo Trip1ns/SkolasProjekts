@@ -1,0 +1,1086 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6fb;
+  color: #333;
+}
+
+/* KONTEINERS */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* VIRSRAKSTI */
+h2 {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/* TEKSTS */
+.subtitle,
+.hint {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* FORMAS */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* POGAS */
+button {
+  background: #4f6ef7;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #3b54c7;
+}
+
+/* KARTĪTES */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* SKOLĒNA KALENDĀRS */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.slot {
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 6px solid #4f6ef7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.slot:hover {
+  transform: scale(1.03);
+  background: #eef1ff;
+}
+
+.slot.full {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slot.closed {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+.slot.closed::after {
+  content: "🔒 Slēgts";
+  display: block;
+  font-size: 11px;
+  color: #dc2626;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.slot .teacher {
+  font-weight: bold;
+}
+
+.slot .free {
+  font-size: 13px;
+  color: green;
+}
+.teacher-item {
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-left: 4px solid #4f6ef7;
+}
+
+.teacher-item:hover {
+  background: #eef1ff;
+  transform: translateX(4px);
+}
+/* SKOLOTĀJA PIETEIKUMI */
+.btn-accept {
+  background: #10b981;
+}
+
+.btn-accept:hover {
+  background: #059669;
+}
+
+.btn-reject {
+  background: #ef4444;
+}
+
+.btn-reject:hover {
+  background: #dc2626;
+}
+
+/* ADMIN */
+canvas {
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+/* KĻŪDAS */
+.error {
+  background: #ffe3e3;
+  color: #b00000;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* MESSAGE AREA */
+#message-area {
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.message-success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.message-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+.message-info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #3b82f6;
+}
+
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.welcome {
+  margin: 0;
+  font-size: 16px;
+}
+
+.logout-link {
+  color: #4f6ef7;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid #4f6ef7;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.logout-link:hover {
+  background: #4f6ef7;
+  color: white;
+}
+
+/* FILTRI */
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.refresh-btn {
+  height: fit-content;
+}
+
+/* PRIEKŠMETU SELEKCIJA */
+.subject-section {
+  margin-bottom: 40px;
+}
+
+.subject-header {
+  margin: 0 0 20px 0;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.teacher-section {
+  margin-bottom: 25px;
+  margin-left: 20px;
+}
+
+.teacher-name-header {
+  margin: 0 0 12px 0;
+  color: #4f6ef7;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.subject-group {
+  margin-bottom: 25px;
+}
+
+.subject-title {
+  margin: 0 0 12px 0;
+  color: #4f6ef7;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+
+.slot {
+  position: relative;
+}
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-accepted {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.slot-time {
+  font-weight: 600;
+  color: #4f6ef7;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.slot-day-time {
+  font-weight: 600;
+  color: #4f6ef7;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.slot-room {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.slot-free {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #059669;
+  font-weight: 500;
+}
+
+.slot.requested {
+  background: #fef3c7;
+  border-left-color: #f59e0b;
+}
+
+.slot.requested.accepted {
+  background: #d1fae5;
+  border-left-color: #10b981;
+}
+
+.slot.requested.pending {
+  background: #fef3c7;
+  border-left-color: #f59e0b;
+}
+
+/* SKOLĒNU PIETEIKUMI */
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.request-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #9ca3af;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.request-card.request-accepted {
+  border-left-color: #10b981;
+  background: #f0fdf4;
+}
+
+.request-card.request-pending {
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.request-card.request-rejected {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.request-meta {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.request-reason {
+  color: #374151;
+  margin: 10px 0;
+  padding: 10px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.reject-reason {
+  color: #991b1b;
+  font-size: 13px;
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-accepted {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-cancel {
+  background: #ef4444;
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.btn-cancel:hover {
+  background: #dc2626;
+}
+
+.no-requests, .no-slots, .no-teachers {
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* SKOLOTĀJU SKATA PIETEIKUMI */
+.teacher-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* ADMIN SKATS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.stat-card:nth-child(2) {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-card:nth-child(3) {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-card:nth-child(4) {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.stat-card:nth-child(5) {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-card:nth-child(6) {
+  background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.btn-primary {
+  background: #4f6ef7;
+  padding: 12px 24px;
+}
+
+.btn-primary:hover {
+  background: #3b54c7;
+}
+
+.btn-delete {
+  background: #ef4444;
+  font-size: 12px;
+  padding: 6px 12px;
+  margin-top: 8px;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+.slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.teacher-slots-section {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.teacher-name-header {
+  margin: 0 0 15px 0;
+  color: #4f6ef7;
+  font-size: 16px;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.slot-card {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid #4f6ef7;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.slot-info {
+  font-size: 14px;
+}
+
+.slot-capacity {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.role-header {
+  margin: 0 0 15px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e7eb;
+  color: #4f6ef7;
+  font-size: 16px;
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.user-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #9ca3af;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-card .user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.user-username {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 4px 0;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.user-role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.role-student {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.role-teacher {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.role-admin {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* PIETEIKŠANĀS */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #4f6ef7 0%, #3b54c7 100%);
+  border-radius: 16px 16px 0 0;
+  color: white;
+  margin: 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  background: #f9fafb;
+  border-radius: 0 0 16px 16px;
+}
+
+.slot-info-display {
+  background: #f0f4ff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid #4f6ef7;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(79, 110, 247, 0.1);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row .label {
+  font-weight: 600;
+  color: #3b54c7;
+  min-width: 100px;
+}
+
+.info-row .value {
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.custom-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.custom-textarea:focus {
+  outline: none;
+  border-color: #4f6ef7;
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
+}
+
+.char-count {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* KĻŪDAS */
+.warning-box {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #4f6ef7 0%, #3b54c7 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modal-close {
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  background: none;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  transform: scale(1.2);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 14px;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #4f6ef7;
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
+}
+
+
+.consultation-notes {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.consultation-notes strong {
+  color: #2e7d32;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.consultation-notes div {
+  color: #333;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* POGAS */
+.btn-cancel,
+.btn-submit {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #d1d5db;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #4f6ef7 0%, #3b54c7 100%);
+  color: white;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 110, 247, 0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4f6ef7 0%, #3b54c7 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(79, 110, 247, 0.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+  .modal {
+    max-width: 95%;
+  }
+  
+  .modal-header {
+    padding: 16px;
+  }
+  
+  .modal-body {
+    padding: 16px;
+  }
+  
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+  
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+  }
+  
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .teacher-list-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .slots-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
