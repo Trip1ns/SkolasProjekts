@@ -7,7 +7,7 @@ import re
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///konsultacijas.db'
-app.config['SECRET_KEY'] = 'projekts2024'
+app.config['SECRET_KEY'] = 'projekts2026'
 db.init_app(app)
 
 login_manager = LoginManager()
