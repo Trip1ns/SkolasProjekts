@@ -17,7 +17,6 @@ class Konsultacija(db.Model):
     skolotajs_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     datums_laiks = db.Column(db.DateTime, nullable=False)
     kabinets = db.Column(db.String(20), nullable=False)
-    # Attiecība, lai vieglāk piekļūtu skolotāja datiem
     skolotajs = db.relationship('User', backref='konsultacijas')
 
 class Pieteikums(db.Model):
