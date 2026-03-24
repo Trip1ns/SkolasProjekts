@@ -18,7 +18,6 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# --- MARŠRUTI ---
 
 @app.route('/')
 def index():
@@ -39,7 +38,6 @@ def login():
 
 
 def is_password_strong(password):
-    # Definējam regex modeli
     regex = r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
     return bool(re.match(regex, password))
 
@@ -65,11 +63,11 @@ def admin_dashboard():
         elif form_type == 'edit_konsultacija':
             k_id = request.form.get('k_id')
             dt = datetime.strptime(request.form['datums_laiks'], '%Y-%m-%dT%H:%M')
-            if k_id: # Rediģēt esošu
+            if k_id: 
                 k = Konsultacija.query.get(k_id)
                 k.datums_laiks = dt # type: ignore
                 k.kabinets = request.form['kabinets'] # type: ignore
-            else: # Pievienot jaunu
+            else: 
                 k = Konsultacija(skolotajs_id=request.form['skolotajs_id'], datums_laiks=dt, kabinets=request.form['kabinets']) # type: ignore
                 db.session.add(k)
         
@@ -94,7 +92,6 @@ def mainit_paroli():
         if not check_password_hash(current_user.password, veca): # type: ignore
             flash("Pašreizējā parole nav pareiza!")
         elif is_password_strong(jauna) is not True:
-            # is_password_strong jau satur flash ziņojumu
             pass
         else:
             current_user.password = generate_password_hash(jauna) # type: ignore
@@ -119,7 +116,6 @@ def skolotajs_dashboard():
             pieteikums.atteikuma_iemesls = request.form.get('iemesls') # type: ignore
         db.session.commit() 
 
-    # Redz pieteikumus tikai uz savām konsultācijām
     pieteikumi = Pieteikums.query.join(Konsultacija).filter(Konsultacija.skolotajs_id == current_user.id).all()
     return render_template('skolotajs.html', pieteikumi=pieteikumi)
 
