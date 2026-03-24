@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Pieteikšanās</title>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-96">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-600">Konsultācijas</h2>
+        <form method="POST">
+            <div class="mb-4">
+                <label class="block text-gray-700">Lietotājvārds</label>
+                <input type="text" name="username" class="w-full border p-2 rounded mt-1" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700">Parole</label>
+                <input type="password" name="password" class="w-full border p-2 rounded mt-1" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded font-bold hover:bg-blue-700 transition">Pieteikties</button>
+        </form>
+    </div>
+</body>
+</html>

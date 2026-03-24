@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Kalendārs</title>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-5xl mx-auto">
+        <a href="/skolens" class="text-blue-600 mb-4 inline-block">← Atpakaļ</a>
+        <h1 class="text-3xl font-bold mb-8">Pieteikties konsultācijai</h1>
+
+        <form method="GET" class="bg-white p-4 rounded shadow mb-8 flex flex-wrap gap-4">
+            <input type="text" name="search" placeholder="Meklēt skolotāju..." class="border p-2 rounded flex-1">
+            <input type="text" name="subject" placeholder="Mācību priekšmets" class="border p-2 rounded flex-1">
+            <button class="bg-gray-800 text-white px-6 py-2 rounded">Meklēt</button>
+        </form>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for k in konsultacijas %}
+            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+                <div class="flex justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold">{{ k.skolotajs.vards }} {{ k.skolotajs.uzvards }}</h3>
+                        <p class="text-blue-600 text-sm font-semibold">{{ k.skolotajs.prieksmets }}</p>
+                    </div>
+                    <div class="text-right text-gray-500">
+                        <p class="text-lg font-bold">{{ k.datums_laiks.strftime('%d.%m') }}</p>
+                        <p>{{ k.datums_laiks.strftime('%H:%M') }}</p>
+                    </div>
+                </div>
+                <p class="mb-4 text-gray-700">Kabinets: <strong>{{ k.kabinets }}</strong></p>
+                <form method="POST">
+                    <input type="hidden" name="k_id" value="{{ k.id }}">
+                    <textarea name="iemesls" placeholder="Kāpēc vēlies ierasties?" class="w-full border p-2 rounded mb-2 text-sm" required></textarea>
+                    <button class="w-full bg-green-600 text-white py-2 rounded font-bold hover:bg-green-700">Nosūtīt pieteikumu</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

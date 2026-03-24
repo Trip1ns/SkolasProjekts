@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin Panelis</title>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Admin Panelis</h1>
+            <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Iziet</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded shadow border-t-4 border-green-500">
+                <h2 class="text-xl font-bold mb-4">Pievienot lietotāju</h2>
+                <form method="POST" class="space-y-3">
+                    <input type="hidden" name="form_type" value="add_user">
+                    <input type="text" name="username" placeholder="Lietotājvārds" class="w-full border p-2 rounded" required>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" name="vards" placeholder="Vārds" class="border p-2 rounded" required>
+                        <input type="text" name="uzvards" placeholder="Uzvārds" class="border p-2 rounded" required>
+                    </div>
+                    <input type="password" name="password" placeholder="Parole" class="w-full border p-2 rounded" required>
+                    <select name="loma" class="w-full border p-2 rounded">
+                        <option value="skolens">Skolēns</option>
+                        <option value="skolotajs">Skolotājs</option> <option value="admin">Administrators</option>
+                    </select>
+                    <input type="text" name="prieksmets" placeholder="Priekšmets (tikai skolotājiem)" class="w-full border p-2 rounded">
+                    <button class="bg-green-600 text-white px-4 py-2 rounded w-full font-bold">Pievienot</button>
+                </form>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow border-t-4 border-blue-500">
+                <h2 class="text-xl font-bold mb-4" id="form-title">Konsultācijas pievienošana</h2>
+                <form method="POST" class="space-y-3" id="edit-form">
+                    <input type="hidden" name="form_type" value="edit_konsultacija">
+                    <input type="hidden" name="k_id" id="edit_k_id">
+                    
+                    <select name="skolotajs_id" id="edit_skolotajs" class="w-full border p-2 rounded" required>
+                        <option value="">-- Atlasīt skolotāju --</option>
+                        {% for s in skolotaji %}
+                        <option value="{{ s.id }}">{{ s.vards }} {{ s.uzvards }} ({{ s.prieksmets }})</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <input type="datetime-local" name="datums_laiks" id="edit_laiks" class="w-full border p-2 rounded" required>
+                    <input type="text" name="kabinets" id="edit_kabinets" placeholder="Kabinets" class="w-full border p-2 rounded" required>
+                    
+                    <div class="flex gap-2">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded flex-1 font-bold">Saglabāt</button>
+                        <button type="button" onclick="resetForm()" class="bg-gray-400 text-white px-4 py-2 rounded">Atcelt</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-12 mb-4">Esošās konsultācijas</h2>
+        <div class="bg-white rounded shadow overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="p-3">Skolotājs</th>
+                        <th class="p-3">Laiks</th>
+                        <th class="p-3">Kabinets</th>
+                        <th class="p-3 text-center">Darbības</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in konsultacijas %}
+                    <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="p-3">{{ k.skolotajs.vards }} {{ k.skolotajs.uzvards }}</td>
+                        <td class="p-3">{{ k.datums_laiks.strftime('%d.%m.%Y %H:%M') }}</td>
+                        <td class="p-3">{{ k.kabinets }}</td>
+                        <td class="p-3 flex justify-center gap-2">
+                            <button onclick="fillEdit('{{ k.id }}', '{{ k.skolotajs_id }}', '{{ k.datums_laiks.strftime('%Y-m-dT%H,')}}', '{{ k.kabinets }}')" 
+                                    class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                                Rediģēt
+                            </button>
+                            <form method="POST" onsubmit="return confirm('Tiešām dzēst?')">
+                                <input type="hidden" name="form_type" value="delete_konsultacija">
+                                <input type="hidden" name="k_id" value="{{ k.id }}">
+                                <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">Dzēst</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function fillEdit(id, skId, laiks, kab) {
+            document.getElementById('form-title').innerText = "Rediģēt konsultāciju";
+            document.getElementById('edit_k_id').value = id;
+            document.getElementById('edit_skolotajs').value = skId;
+            document.getElementById('edit_laiks').value = laiks;
+            document.getElementById('edit_kabinets').value = kab;
+        }
+
+        function resetForm() {
+            document.getElementById('form-title').innerText = "Konsultācijas pievienošana";
+            document.getElementById('edit_k_id').value = '';
+            document.getElementById('edit-form').reset();
+        }
+    </script>
+</body>
+</html>

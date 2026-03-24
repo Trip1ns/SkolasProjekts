@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Skolotāja panelis</title>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Sveicināti, {{ current_user.vards }}!</h1>
+            <a href="/logout" class="text-red-600 font-bold">Iziet</a>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-4 text-blue-800">Pieteikumi uz konsultācijām</h2>
+        <div class="space-y-4">
+            {% for p in pieteikumi %}
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 {% if p.statuss == 'Gaidīšanā' %}border-yellow-400{% elif p.statuss == 'Pieņemts' %}border-green-400{% else %}border-red-400{% endif %}">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-bold text-lg">{{ p.skolens.vards }} {{ p.skolens.uzvards }}</h3>
+                        <p class="text-sm text-gray-600">Laiks: {{ p.konsultacija.datums_laiks.strftime('%d.%m.%Y %H:%M') }} | Kabinets: {{ p.konsultacija.kabinets }}</p>
+                        <p class="mt-2 font-medium italic">"{{ p.iemesls }}"</p>
+                        <p class="mt-1 text-sm font-bold">Statuss: {{ p.statuss }}</p>
+                    </div>
+                    
+                    {% if p.statuss == 'Gaidīšanā' %}
+                    <form method="POST" class="flex flex-col gap-2">
+                        <input type="hidden" name="p_id" value="{{ p.id }}">
+                        <button name="accept" class="bg-green-500 text-white px-4 py-1 rounded">Apstiprināt</button>
+                        <div class="flex gap-1">
+                            <input type="text" name="iemesls" placeholder="Atteikuma iemesls" class="border p-1 text-xs rounded">
+                            <button name="reject" class="bg-red-500 text-white px-2 py-1 rounded text-xs">Noraidīt</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
